@@ -1,7 +1,16 @@
+import "../header.css";
+import SearchForm from "./SearchForm";
+import Logo from "./Logo";
+import Time from "./Time";
+
 function Header() {
   return (
     <header>
-      <h1></h1>
+      <div className="header-content">
+        <Logo />
+        <Time />
+        <SearchForm />
+      </div>
     </header>
   );
 }

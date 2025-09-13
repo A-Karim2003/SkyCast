@@ -6,6 +6,14 @@
   list-style-type: none;
   text-decoration: none;
 }
+:root {
+  --primary-bg: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 10, 10, 0.35)
+  );
+  --primary-blur: blur(12px);
+}
 
 html,
 body,
