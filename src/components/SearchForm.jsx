@@ -2,7 +2,7 @@ function SearchForm() {
   return (
     <form>
       <input type="text" />
-      <button type="submit"></button>
+      <button type="submit">Enter</button>
     </form>
   );
 }

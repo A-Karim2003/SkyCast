@@ -12,21 +12,22 @@ header {
   -webkit-backdrop-filter: blur(12px);
   box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 4px,
     rgba(0, 0, 0, 0.5) 0px 7px 13px -3px, rgba(0, 0, 0, 0.4) 0px -3px 0px inset;
+  border: none;
 }
 
 .header-content {
   max-width: 1000px;
   width: 100%;
-
+  height: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 2rem;
-  border: solid;
   margin: auto;
 }
 
 .logo-container {
-  width: 100px;
+  width: 80px;
   height: 100%;
 }
 
@@ -36,10 +37,64 @@ header {
   object-fit: contain;
 }
 
-form {
-  flex: 1;
-}
-
 .time {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+form {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+form input,
+form button {
+  outline: none;
+  border-radius: 15px;
+  padding: 1em;
+  background-color: #ccc;
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+  transition: 300ms ease-in-out;
+  border: none;
+}
+
+input {
+  width: 250px;
+  transition: 1s ease;
+}
+
+form input:focus,
+form button:focus {
+  background-color: white;
+  transform: scale(1.05);
+  box-shadow: 13px 13px 100px #969696, -13px -13px 100px #ffffff;
+}
+
+@media (max-width: 1260px) {
+  .weekday {
+    display: none;
+  }
+}
+
+@media (max-width: 880px) {
+  .weekday {
+    display: none;
+  }
+
+  input {
+    width: 100px;
+  }
+}
+
+@media (max-width: 670px) {
+  .time {
+    display: none;
+  }
 }

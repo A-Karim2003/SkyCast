@@ -2,6 +2,8 @@
 import Background from "./components/background";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import CurrentWeather from "./components/CurrentWeather";
+import WeatherContents from "./components/WeatherContents";
 
 function App() {
   return (
@@ -9,6 +11,9 @@ function App() {
       <Background />
       <Main>
         <Header />
+        <WeatherContents>
+          <CurrentWeather />
+        </WeatherContents>
       </Main>
     </div>
   );
