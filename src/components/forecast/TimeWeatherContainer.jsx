@@ -1,4 +1,4 @@
-function TimeWeatherContainer({ children }) {
-  return <div className="time-weather-container">{children}</div>;
+function TimeWeatherContainer({ children, className }) {
+  return <div className={className}>{children}</div>;
 }
 export default TimeWeatherContainer;

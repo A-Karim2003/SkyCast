@@ -1,5 +1,5 @@
 function ForcastDays({ children }) {
-  return <div>{children}</div>;
+  return <div className="forecast-days">{children}</div>;
 }
 
 export default ForcastDays;
