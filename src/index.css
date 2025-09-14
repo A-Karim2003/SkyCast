@@ -24,7 +24,7 @@ body,
 }
 
 body {
-  background: url("/src/assets/background/stormy.jpg") no-repeat center center;
+  background: url("/src/assets/background/windy.jpg") no-repeat center center;
   background-size: cover;
   position: relative;
   overflow: hidden;
@@ -105,4 +105,55 @@ main {
     top: -10vh;
     left: -10vw;
   }
+}
+
+/* ----------------WeatherContents----------------- */
+
+.weather-contents {
+  display: flex;
+  width: 100%;
+  height: 80%;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 880px) {
+  .weather-contents {
+    flex-direction: column;
+  }
+}
+
+/* ----------------CurrentWeather----------------- */
+
+.current-weather {
+  flex: 1;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: flex-end;
+}
+.current-weather > div {
+  padding: 2rem;
+}
+
+.current-weather * {
+  letter-spacing: 1px;
+}
+
+.current-weather h1 {
+  font-size: 48px;
+}
+.current-weather h2 {
+  font-size: 32px;
+}
+.current-weather p {
+  display: flex;
+  font-size: 22px;
+  gap: 6px;
+}
+
+/* ----------------Forecast----------------- */
+
+.forecast {
+  border: solid;
+  flex: 1;
 }

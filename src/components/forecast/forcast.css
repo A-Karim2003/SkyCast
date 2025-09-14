@@ -1,0 +1,50 @@
+/* ---------------forcast-times--------------- */
+.forecast-title {
+  text-align: center;
+}
+.forecast-title h3 {
+  display: inline-block;
+  border-bottom: solid #eee 1px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* ---------------forcast-times--------------- */
+
+.forcast-times {
+  height: 160px;
+  width: 100%;
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    rgba(84, 84, 84, 0.6),
+    rgba(0, 0, 0, 0.8)
+  );
+  backdrop-filter: blur(15px) brightness(0.8) contrast(1.1);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+/* ---------------time-weather--------------- */
+
+.time-weather-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-weather {
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  letter-spacing: 1px;
+}

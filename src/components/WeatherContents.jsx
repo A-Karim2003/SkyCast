@@ -1,5 +1,5 @@
 function WeatherContents({ children }) {
-  return <div>{children}</div>;
+  return <section className="weather-contents">{children}</section>;
 }
 
 export default WeatherContents;

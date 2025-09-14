@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import CurrentWeather from "./components/CurrentWeather";
 import WeatherContents from "./components/WeatherContents";
+import Forcast from "./components/forecast/Forecast";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Header />
         <WeatherContents>
           <CurrentWeather />
+          <Forcast />
         </WeatherContents>
       </Main>
     </div>
