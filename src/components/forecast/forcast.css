@@ -1,10 +1,11 @@
 /* ---------------forcast-------------------- */
 
 .forecast {
-  border: solid red;
+  flex: 1.3;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding-right: 1rem;
 }
 
 /* ---------------forcast-times--------------- */
