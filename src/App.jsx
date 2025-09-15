@@ -11,25 +11,24 @@ const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 function App() {
   const [query, setQuery] = useState();
   const [forecast, setForecast] = useState("");
-  const [now, setNow] = useState();
+  const [now, setNow] = useState(DateTime());
 
   function DateTime() {
     const now = new Date();
 
-    const formatted = now.toLocaleDateString("en-US", {
+    const formattedData = now.toLocaleDateString("en-US", {
       weekday: "long",
       month: "long",
       day: "numeric",
       year: "numeric",
     });
 
-    console.log(formatted);
-
-    return formatted;
+    const formattedTime = now.toLocaleTimeString("en-UK", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    return [formattedData, formattedTime];
   }
-  console.log(new Date());
-
-  console.log(now);
 
   useEffect(() => {
     if (!query) return;
@@ -70,8 +69,7 @@ function App() {
   }, [query]);
 
   useEffect(() => {
-    const intervalID = setInterval(() => setNow(DateTime), 60 * 1000);
-
+    const intervalID = setInterval(() => setNow(DateTime()), 60 * 1000);
     return () => clearInterval(intervalID);
   });
 
@@ -79,7 +77,7 @@ function App() {
     <div className="app">
       <Background />
       <Main>
-        <Header setQuery={setQuery} query={query} forecast={forecast} />
+        <Header setQuery={setQuery} query={query} now={now} />
         <WeatherContents>
           <CurrentWeather />
           <Forcast />
