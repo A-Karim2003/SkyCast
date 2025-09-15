@@ -9,8 +9,8 @@ import Forcast from "./components/forecast/Forecast";
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 function App() {
-  const [query, setQuery] = useState();
-  const [forecast, setForecast] = useState("");
+  const [query, setQuery] = useState("London");
+  const [forecast, setForecast] = useState([]);
   const [now, setNow] = useState(DateTime());
 
   function DateTime() {
@@ -31,38 +31,45 @@ function App() {
   }
 
   useEffect(() => {
-    if (!query) return;
-
     async function FetchWeather() {
-      //*----------------Location data----------------
-      const geoRes = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=1&appid=${API_KEY}`
-      );
-      const geoData = await geoRes.json();
-      const { lat, lon } = geoData[0];
+      try {
+        //*----------------Location data----------------
+        const geoRes = await fetch(
+          `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=1&appid=${API_KEY}`
+        );
 
-      //*----------------Weather data-----------------
+        if (!geoRes.ok) throw new Error("Could not fetch location data");
 
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
-      );
+        const geoData = await geoRes.json();
+        const { lat, lon } = geoData[0];
 
-      const weatherData = await res.json();
-      const cityName = weatherData.city.name;
+        //*----------------Weather data-----------------
 
-      const filteredDataArray = weatherData.list.slice(0, 5).map((data) => {
-        return {
-          temp: data.main.temp,
-          minTemp: data.main.temp_min,
-          maxTemp: data.main.temp_max,
-          weather: data.weather[0].main,
-          time: data.dt_txt.split(" ")[1],
-          date: data.dt_txt.split(" ")[0],
-          cityName: cityName,
-        };
-      });
+        const res = await fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+        );
 
-      setForecast(filteredDataArray);
+        if (!res.ok) throw new Error("Could not fetch weather data");
+
+        const weatherData = await res.json();
+        const cityName = weatherData.city.name;
+
+        const filteredDataArray = weatherData.list.slice(0, 5).map((data) => {
+          return {
+            temp: data.main.temp,
+            minTemp: data.main.temp_min,
+            maxTemp: data.main.temp_max,
+            weather: data.weather[0].main,
+            time: data.dt_txt.split(" ")[1],
+            date: data.dt_txt.split(" ")[0],
+            cityName: cityName,
+          };
+        });
+
+        setForecast(filteredDataArray);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     FetchWeather();
@@ -79,8 +86,8 @@ function App() {
       <Main>
         <Header setQuery={setQuery} query={query} now={now} />
         <WeatherContents>
-          <CurrentWeather />
-          <Forcast />
+          <CurrentWeather forecast={forecast} />
+          <Forcast forecast={forecast} />
         </WeatherContents>
       </Main>
     </div>

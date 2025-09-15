@@ -1,9 +1,14 @@
-function TimeWeather() {
+function TimeWeather({ weather }) {
+  console.log(weather);
+
+  const { temp, time } = weather;
+  const formattedTime = time.split(":").slice(0, 2).join(":");
+
   return (
     <div className="time-weather">
-      <p>Now</p>
+      <p>{formattedTime}</p>
       <p>🌧️</p>
-      <p>23°C</p>
+      <p>{Math.round(Number(temp))}°C</p>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import ForecastWeather from "./ForecastWeather";
 import ForecastTitle from "./ForecastTitle";
 import TimeWeatherContainer from "./TimeWeatherContainer";
 import "./forcast.css";
-function Forcast() {
+function Forcast({ forecast }) {
   return (
     <div className="forecast">
       <ForcastTimes>
@@ -13,12 +13,9 @@ function Forcast() {
           <h3>Thunderstorms expected around 00:00</h3>
         </ForecastTitle>
         <TimeWeatherContainer className={"time-weather-container"}>
-          <TimeWeather />
-          <TimeWeather />
-          <TimeWeather />
-          <TimeWeather />
-          <TimeWeather />
-          <TimeWeather />
+          {forecast.map((weather) => {
+            return <TimeWeather weather={weather} />;
+          })}
         </TimeWeatherContainer>
       </ForcastTimes>
       <ForcastDays>

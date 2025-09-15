@@ -15,10 +15,11 @@
 .forecast-title h3 {
   display: inline-block;
   border-bottom: solid #eee 1px;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
   font-weight: 400;
   letter-spacing: 1px;
+  width: 98%;
 }
 
 /* ---------------forcast-times--------------- */
@@ -47,7 +48,7 @@
 
 .time-weather-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
