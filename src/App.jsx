@@ -27,7 +27,7 @@ function App() {
 
     return formatted;
   }
-  console.log(new Date().);
+  console.log(new Date());
 
   console.log(now);
 
