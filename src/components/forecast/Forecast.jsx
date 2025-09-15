@@ -6,6 +6,8 @@ import ForecastTitle from "./ForecastTitle";
 import TimeWeatherContainer from "./TimeWeatherContainer";
 import "./forcast.css";
 function Forcast({ forecast }) {
+  console.log(forecast);
+
   return (
     <div className="forecast">
       <ForcastTimes>
@@ -14,7 +16,7 @@ function Forcast({ forecast }) {
         </ForecastTitle>
         <TimeWeatherContainer className={"time-weather-container"}>
           {forecast.map((weather) => {
-            return <TimeWeather weather={weather} />;
+            return <TimeWeather key={weather.time} weather={weather} />;
           })}
         </TimeWeatherContainer>
       </ForcastTimes>
