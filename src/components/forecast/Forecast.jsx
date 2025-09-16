@@ -6,8 +6,6 @@ import ForecastTitle from "./ForecastTitle";
 import TimeWeatherContainer from "./TimeWeatherContainer";
 import "./forcast.css";
 function Forcast({ forecast }) {
-  console.log(forecast);
-
   return (
     <div className="forecast">
       <ForcastTimes>

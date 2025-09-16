@@ -56,9 +56,7 @@ function App() {
         const weatherData = await res.json();
         const cityName = weatherData.city.name;
 
-        const filteredDataArray = weatherData.list.slice(0, 6).map((data) => {
-          console.log(data);
-
+        const filteredHourlyArray = weatherData.list.slice(0, 6).map((data) => {
           return {
             temp: data.main.temp,
             minTemp: data.main.temp_min,
@@ -69,8 +67,35 @@ function App() {
             cityName: cityName,
           };
         });
+        setForecast(filteredHourlyArray);
 
-        setForecast(filteredDataArray);
+        /*
+          I want to return an array of objects containing the |weekday, Weather type, min_temp, max_temp|
+          Each object should represent a day of forecast.
+
+          Only objects with the time "12:00" should be returned for forecast consistency
+
+
+        */
+
+        // * Group the arrays by dates
+        const dailyForecast = weatherData.list.reduce((acc, data) => {
+          const date = data.dt_txt.split(" ")[0];
+          if (!acc[date]) acc[date] = [];
+          acc[date].push(data);
+
+          return acc;
+        }, {});
+
+        console.log(dailyForecast);
+
+        // * return the objects with the time "12:00"
+        const filteredDailyForecast = [];
+        for (const [key, value] of Object.entries(dailyForecast)) {
+          filteredDailyForecast.push(value[4]);
+        }
+
+        // console.log(filteredDailyForecast);
       } catch (error) {
         console.log(error);
       }
