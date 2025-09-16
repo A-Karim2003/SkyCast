@@ -5,7 +5,7 @@ import ForecastWeather from "./ForecastWeather";
 import ForecastTitle from "./ForecastTitle";
 import TimeWeatherContainer from "./TimeWeatherContainer";
 import "./forcast.css";
-function Forcast({ forecast }) {
+function Forcast({ hourlyForecast, dailyForecast }) {
   return (
     <div className="forecast">
       <ForcastTimes>
@@ -13,9 +13,9 @@ function Forcast({ forecast }) {
           <h3>Thunderstorms expected around 00:00</h3>
         </ForecastTitle>
         <TimeWeatherContainer className={"time-weather-container"}>
-          {forecast.map((weather) => {
-            return <TimeWeather key={weather.time} weather={weather} />;
-          })}
+          {hourlyForecast.map((weather) => (
+            <TimeWeather key={weather.time} weather={weather} />
+          ))}
         </TimeWeatherContainer>
       </ForcastTimes>
       <ForcastDays>
@@ -24,9 +24,9 @@ function Forcast({ forecast }) {
         </ForecastTitle>
 
         <TimeWeatherContainer className={"forecast-weather-container"}>
-          <ForecastWeather />
-          <ForecastWeather />
-          <ForecastWeather />
+          {dailyForecast.map((data) => (
+            <ForecastWeather key={data.weekday} data={data} />
+          ))}
         </TimeWeatherContainer>
       </ForcastDays>
     </div>

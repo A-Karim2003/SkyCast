@@ -146,3 +146,8 @@ main {
   font-size: 22px;
   gap: 6px;
 }
+
+.icon {
+  max-width: 48px;
+  width: 100%;
+}

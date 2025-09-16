@@ -10,10 +10,9 @@ const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 function App() {
   const [query, setQuery] = useState("London");
-  const [forecast, setForecast] = useState([]);
+  const [hourlyForecast, setHourlyForecast] = useState([]);
+  const [dailyForecast, setDailyForecast] = useState([]);
   const [now, setNow] = useState(DateTime());
-
-  //! Create a Daily forecast state for group it by days
 
   function DateTime() {
     const now = new Date();
@@ -61,25 +60,16 @@ function App() {
             temp: data.main.temp,
             minTemp: data.main.temp_min,
             maxTemp: data.main.temp_max,
-            weather: data.weather[0].main,
+            iconUrl: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
             time: data.dt_txt.split(" ")[1],
             date: data.dt_txt.split(" ")[0],
             cityName: cityName,
           };
         });
-        setForecast(filteredHourlyArray);
-
-        /*
-          I want to return an array of objects containing the |weekday, Weather type, min_temp, max_temp|
-          Each object should represent a day of forecast.
-
-          Only objects with the time "12:00" should be returned for forecast consistency
-
-
-        */
+        setHourlyForecast(filteredHourlyArray);
 
         // * Group the arrays by dates
-        const dailyForecast = weatherData.list.reduce((acc, data) => {
+        const groupedDailyForecast = weatherData.list.reduce((acc, data) => {
           const date = data.dt_txt.split(" ")[0];
           if (!acc[date]) acc[date] = [];
           acc[date].push(data);
@@ -87,15 +77,29 @@ function App() {
           return acc;
         }, {});
 
-        console.log(dailyForecast);
-
         // * return the objects with the time "12:00"
         const filteredDailyForecast = [];
-        for (const [key, value] of Object.entries(dailyForecast)) {
-          filteredDailyForecast.push(value[4]);
+        for (const [key, value] of Object.entries(groupedDailyForecast)) {
+          const midday = value.find((entry) =>
+            entry.dt_txt.includes("12:00:00")
+          );
+
+          const temps = value.map((entry) => entry.main.temp);
+          const min_temp = Math.min(...temps);
+          const max_temp = Math.max(...temps);
+
+          const date = new Date(key);
+
+          if (midday)
+            filteredDailyForecast.push({
+              iconUrl: `http://openweathermap.org/img/wn/${value[4].weather[0].icon}@2x.png`,
+              weekday: String(date).split(" ")[0],
+              min_temp: min_temp,
+              max_temp: max_temp,
+            });
         }
 
-        // console.log(filteredDailyForecast);
+        setDailyForecast(filteredDailyForecast);
       } catch (error) {
         console.log(error);
       }
@@ -107,7 +111,7 @@ function App() {
   useEffect(() => {
     const intervalID = setInterval(() => setNow(DateTime()), 60 * 1000);
     return () => clearInterval(intervalID);
-  });
+  }, []);
 
   return (
     <div className="app">
@@ -115,8 +119,11 @@ function App() {
       <Main>
         <Header setQuery={setQuery} query={query} now={now} />
         <WeatherContents>
-          <CurrentWeather forecast={forecast} />
-          <Forcast forecast={forecast} />
+          <CurrentWeather hourlyForecast={hourlyForecast} />
+          <Forcast
+            hourlyForecast={hourlyForecast}
+            dailyForecast={dailyForecast}
+          />
         </WeatherContents>
       </Main>
     </div>

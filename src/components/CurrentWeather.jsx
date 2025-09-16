@@ -1,12 +1,15 @@
-function CurrentWeather({ forecast }) {
-  if (!forecast.length) return;
+function CurrentWeather({ hourlyForecast }) {
+  if (!hourlyForecast.length) return;
 
-  const { temp, minTemp, maxTemp, cityName } = forecast[0];
+  console.log(hourlyForecast);
 
+  const { temp, minTemp, maxTemp, cityName, iconUrl } = hourlyForecast[0];
   return (
     <div className="current-weather">
       <div>
-        <h1>{Math.round(Number(temp))}°C 🌧️</h1>
+        <h1>
+          {Math.round(Number(temp))}°C <img src={iconUrl} />
+        </h1>
         <h2>{cityName}</h2>
         <p>
           <span>H:{Math.round(Number(maxTemp))}°</span>|
