@@ -13,6 +13,8 @@ function App() {
   const [forecast, setForecast] = useState([]);
   const [now, setNow] = useState(DateTime());
 
+  //! Create a Daily forecast state for group it by days
+
   function DateTime() {
     const now = new Date();
 
@@ -54,7 +56,9 @@ function App() {
         const weatherData = await res.json();
         const cityName = weatherData.city.name;
 
-        const filteredDataArray = weatherData.list.slice(0, 5).map((data) => {
+        const filteredDataArray = weatherData.list.slice(0, 6).map((data) => {
+          console.log(data);
+
           return {
             temp: data.main.temp,
             minTemp: data.main.temp_min,
