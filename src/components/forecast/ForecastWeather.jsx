@@ -1,6 +1,4 @@
 function ForecastWeather({ data }) {
-  console.log(data);
-
   return (
     <div className="forecast-weather">
       <div>

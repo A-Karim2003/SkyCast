@@ -64,8 +64,10 @@ function App() {
             time: data.dt_txt.split(" ")[1],
             date: data.dt_txt.split(" ")[0],
             cityName: cityName,
+            description: data.weather[0].description,
           };
         });
+
         setHourlyForecast(filteredHourlyArray);
 
         // * Group the arrays by dates

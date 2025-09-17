@@ -1,8 +1,6 @@
 function CurrentWeather({ hourlyForecast }) {
   if (!hourlyForecast.length) return;
 
-  console.log(hourlyForecast);
-
   const { temp, minTemp, maxTemp, cityName, iconUrl } = hourlyForecast[0];
   return (
     <div className="current-weather">
