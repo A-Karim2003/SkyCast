@@ -34,7 +34,7 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .app {
@@ -111,7 +111,6 @@ main {
   top: 5rem;
   padding: 5rem;
   height: 100vh;
-  border: solid red 2px;
 }
 
 @media (max-width: 880px) {

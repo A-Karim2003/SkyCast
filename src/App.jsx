@@ -16,16 +16,16 @@ function App() {
   const [background, setBackground] = useState("");
 
   function getBackground(weather) {
-    if (!weather) return "./assets/background/default.jpg";
+    if (!weather) return "/src/assets/background/default.jpg";
 
-    if (weather.includes("Cloud")) return "./assets/background/cloudy.jpg";
-    if (weather.includes("Rain")) return "./assets/background/rainy.jpg";
-    if (weather.includes("Snow")) return "./assets/background/snowy.jpg";
+    if (weather.includes("Cloud")) return "/src/assets/background/cloudy.jpg";
+    if (weather.includes("Rain")) return "/src/assets/background/rainy.jpg";
+    if (weather.includes("Snow")) return "/src/assets/background/snowy.jpg";
     if (weather.includes("Sunny") || weather.includes("Clear"))
-      return "./assets/background/sunny.jpg";
-    if (weather.includes("Wind")) return "./assets/background/windy.jpg";
+      return "/src/assets/background/sunny.jpg";
+    if (weather.includes("Wind")) return "/src/assets/background/windy.jpg";
 
-    return "./assets/background/default.jpg";
+    return "/src/assets/background/default.jpg";
   }
   function DateTime() {
     const now = new Date();
@@ -134,11 +134,14 @@ function App() {
   //* useEffect for backgrounds
   useEffect(() => {
     const bg = getBackground(hourlyForecast[0]?.weather);
+    console.log(bg);
 
-    document.body.style.background = `${bg}`;
+    document.body.style.background = `url(${bg})`;
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "center";
+
+    setBackground(bg);
   }, [hourlyForecast]);
 
   return (
