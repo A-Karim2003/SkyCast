@@ -6,14 +6,15 @@ import ForecastTitle from "./ForecastTitle";
 import TimeWeatherContainer from "./TimeWeatherContainer";
 import "./forcast.css";
 function Forcast({ hourlyForecast, dailyForecast }) {
-  // console.log(hourlyForecast);
-  console.log(hourlyForecast[0]?.description);
-
   return (
     <div className="forecast">
       <ForcastTimes>
         <ForecastTitle>
-          <h3>{hourlyForecast[0]?.description} expected</h3>
+          {hourlyForecast.length ? (
+            <h3>{hourlyForecast[0]?.description} expected</h3>
+          ) : (
+            <h3>Next 24 Hour forecast</h3>
+          )}
         </ForecastTitle>
         <TimeWeatherContainer className={"time-weather-container"}>
           {hourlyForecast.map((weather) => (

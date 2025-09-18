@@ -1,5 +1,5 @@
-function Background() {
-  return <img className="background" src="/src/assets/background/windy.jpg" />;
+function Background({ background }) {
+  return <img className="background" src={background} />;
 }
 
 export default Background;

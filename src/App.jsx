@@ -9,11 +9,24 @@ import Forcast from "./components/forecast/Forecast";
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 function App() {
-  const [query, setQuery] = useState("London");
+  const [query, setQuery] = useState();
   const [hourlyForecast, setHourlyForecast] = useState([]);
   const [dailyForecast, setDailyForecast] = useState([]);
   const [now, setNow] = useState(DateTime());
+  const [background, setBackground] = useState("");
 
+  function getBackground(weather) {
+    if (!weather) return "./assets/background/default.jpg";
+
+    if (weather.includes("Cloud")) return "./assets/background/cloudy.jpg";
+    if (weather.includes("Rain")) return "./assets/background/rainy.jpg";
+    if (weather.includes("Snow")) return "./assets/background/snowy.jpg";
+    if (weather.includes("Sunny") || weather.includes("Clear"))
+      return "./assets/background/sunny.jpg";
+    if (weather.includes("Wind")) return "./assets/background/windy.jpg";
+
+    return "./assets/background/default.jpg";
+  }
   function DateTime() {
     const now = new Date();
 
@@ -32,6 +45,8 @@ function App() {
   }
 
   useEffect(() => {
+    if (!query) return;
+
     async function FetchWeather() {
       try {
         //*----------------Location data----------------
@@ -65,6 +80,7 @@ function App() {
             date: data.dt_txt.split(" ")[0],
             cityName: cityName,
             description: data.weather[0].description,
+            weather: data.weather[0].main,
           };
         });
 
@@ -115,9 +131,19 @@ function App() {
     return () => clearInterval(intervalID);
   }, []);
 
+  //* useEffect for backgrounds
+  useEffect(() => {
+    const bg = getBackground(hourlyForecast[0]?.weather);
+
+    document.body.style.background = `${bg}`;
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+  }, [hourlyForecast]);
+
   return (
     <div className="app">
-      <Background />
+      <Background background={background} />
       <Main>
         <Header setQuery={setQuery} query={query} now={now} />
         <WeatherContents>
